@@ -1,0 +1,89 @@
+<div class="container mobile-center">
+  <h1 class="display-4" style="margin-top: 50px">
+    Search Easton's Bible Dictionary
+  </h1>
+
+  <form
+    class="form-center-mobile"
+    style="margin-top: 30px; display: flex; align-items: top; flex-wrap: wrap"
+    (ngSubmit)="searchEaston()"
+  >
+    <mat-form-field appearance="outline" style="margin-right: 10px">
+      <mat-label>Search By?</mat-label>
+      <mat-select
+        [(value)]="searchParamValue"
+        [formControl]="searchParamControl"
+        required
+      >
+        <mat-option *ngFor="let item of searchParams" [value]="item">
+          {{ item }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="searchParamControl.hasError('required')"
+        >This field is required</mat-error
+      >
+    </mat-form-field>
+    <div>
+      <mat-form-field appearance="outline" style="margin-right: 5px">
+        <mat-label>Search Value</mat-label>
+        <input
+          matInput
+          required
+          [formControl]="searchValueControl"
+          #box
+          (keyup)="updateKeystroke(box.value)"
+        />
+        <mat-error *ngIf="searchValueControl.hasError('required')"
+          >This field is required</mat-error
+        >
+      </mat-form-field>
+      <button mat-icon-button type="submit" style="margin-top: 15px">
+        <mat-icon><i class="bi bi-search"></i></mat-icon>
+      </button>
+    </div>
+  </form>
+
+  <h1 class="display-4" style="margin-top: 80px">User Guide</h1>
+  <p class="body-1 body-text">
+    The Easton's Bible Dictionary was originally published by Matthew George
+    Easton in 1893. It has been updated through the years, and I am not certain
+    as to the exact version used for the data in this project, which was
+    compiled by the folks at the
+    <a href="https://m.viz.bible/" style="text-decoration: none" target="_blank"
+      >theographic project.</a
+    >
+    To search for an entry in the Dictionary, simply select one of the following
+    options from the drop-down menu above:<br />
+  </p>
+  <ul>
+    <li>
+      Term Label - The name of the entry in the dictionary. There may be
+      multiple entries/definitions with the same term label. This is the
+      recommended way to search.
+    </li>
+    <li>
+      Dictionary Lookup - A unique name similar to the term label, but only
+      matches one entry/definition.
+    </li>
+    <li>
+      Term ID - A string of characters that uniquely identifies the term in the
+      dictionary.
+    </li>
+    <li>
+      Definition ID - A string of characters that uniquely identifies the
+      definition in the dictionary.
+    </li>
+    <li>
+      Index - An integer that represent the order of entry into the dictionary.
+      Index 1 corresponds to the first entry in the dictionary.
+    </li>
+  </ul>
+  <p>
+    Once you have selected one of the above options, enter the value you want to
+    search for into the "Search Value" box to the right of the drop-down menu.
+    To execute the search, press enter or click the search icon.
+    <br /><br />Note: While the search function can sometimes correct
+    capitalization, it is recommended that if you don't get any results, that
+    you try again with different capitalization.
+  </p>
+</div>

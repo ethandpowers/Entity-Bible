@@ -1,0 +1,57 @@
+<div class="container mobile-center">
+  <div style="display:flex; flex-direction: row; align-items: center; margin-top:50px;">
+  <h1 class="display-4" >Results</h1>
+  <button mat-icon-button style=" margin-left: 20px;" (click)="returnToEaston()">
+    <mat-icon><i class="bi bi-arrow-return-left"></i></mat-icon>
+  </button>
+  </div>
+  <mat-tab-group>
+    <mat-tab *ngFor="let item of data" [label]="item.fields.dictLookup">
+      <div class="mobile-center">
+        <div style="display: flex;">
+          <h1
+            class="fw-light fs-1"
+            style="margin-top: 30px; margin-bottom: 20px"
+          >
+            {{ item.fields.dictLookup }}
+          </h1>
+          <div style=" margin-left:30px; margin-top:47px; display:flex; flex-direction: row; flex-wrap: wrap;">
+            <h5
+              class="fw-normal fs-6"
+              style="margin-left: 30px;"
+            >
+              Term Label: {{ item.fields.termLabel }}
+            </h5>
+            <h5
+              class="fw-normal fs-6"
+              style="margin-left: 30px;"
+            >
+              Definition ID: {{ item.fields.def_id }}
+            </h5>
+            <h5
+              class="fw-normal fs-6"
+              style="margin-left: 30px;"
+            >
+              Dictionary Lookup: {{ item.fields.dictLookup }}
+            </h5>
+            <h5
+              class="fw-normal fs-6"
+              style="margin-left: 30px;"
+            >
+              Index: {{ item.fields.index }}
+            </h5>
+            <h5
+              class="fw-normal fs-6"
+              style="margin-left: 30px;"
+            >
+              Identifier Matches: {{ item.fields.matchSlugs }}
+            </h5>
+          </div>
+        </div>
+        <p class="fw-light">
+          {{ item.fields.dictText }}
+        </p>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

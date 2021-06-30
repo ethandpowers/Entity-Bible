@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.body-text{
+    max-width: 50%;
+    margin-top:50px;
+}
+
+@media (max-width: 1000px) {
+
+    .body-text{
+        margin-top: 50px;
+        max-width:100%
+    }
+
+    .mobile-center{
+        text-align: center;
+    }
+
+    .form-center-mobile{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin:auto;
+    }
+}
