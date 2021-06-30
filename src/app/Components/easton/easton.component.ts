@@ -1,4 +1,3 @@
-import { nullSafeIsEquivalent } from '@angular/compiler/src/output/output_ast';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormControl, Validators } from '@angular/forms';
@@ -17,8 +16,7 @@ export class EastonComponent implements OnInit, OnDestroy {
   constructor(
     private db: AngularFirestore,
     private _snackbar: MatSnackBar,
-    private _router: Router,
-    private _activatedRoute: ActivatedRoute
+    private _router: Router
   ) {
     this.data = [];
     this.sub = new Subscription();

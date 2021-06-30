@@ -25,6 +25,7 @@ import { NotFoundComponent } from './Components/not-found/not-found.component';
 import { EastonResultComponent } from './Components/easton-result/easton-result.component';
 import { TestDataComponent } from './Components/test-data/test-data.component';
 import { ResourcesComponent } from './Components/resources/resources.component';
+import { EntitySearchComponent } from './Components/entity-search/entity-search.component';
 
 const fireBaseConfig = {
   apiKey: "AIzaSyCVQhRPtS9o0ORW0aaT9bjvrbGy1Ptrco4",
@@ -47,7 +48,8 @@ const fireBaseConfig = {
     NotFoundComponent,
     EastonResultComponent,
     TestDataComponent,
-    ResourcesComponent
+    ResourcesComponent,
+    EntitySearchComponent
   ],
   imports: [
     BrowserModule,
