@@ -3,12 +3,76 @@
     Entity Search Tool (In Development)
   </h1>
 
+  <form
+    autocomplete="off"
+    class="form-center-mobile"
+    style="margin-top: 30px; display: flex; align-items: top; flex-wrap: wrap"
+    (ngSubmit)="GetData()"
+  >
+    <mat-form-field appearance="outline" style="margin-right: 10px">
+      <mat-label>Search For?</mat-label>
+      <mat-select
+        [(value)]="searchTypeValue"
+        [formControl]="searchTypeControl"
+        required
+        (selectionChange)="GetSearchParams()"
+      >
+        <mat-option *ngFor="let type of searchTypes" [value]="type">
+          {{ type }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="searchTypeControl.hasError('required')"
+        >This field is required</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="margin-right: 10px">
+      <mat-label>Search By?</mat-label>
+      <mat-select
+        [(value)]="searchParamValue"
+        [formControl]="searchParamControl"
+        required
+      >
+        <mat-option *ngFor="let item of searchParams" [value]="item">
+          {{ item }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="searchParamControl.hasError('required')"
+        >This field is required</mat-error
+      >
+    </mat-form-field>
+    <div>
+      <mat-form-field appearance="outline" style="margin-right: 5px">
+        <mat-label>Search Value</mat-label>
+        <input
+          matInput
+          required
+          [formControl]="searchValueControl"
+          #box
+          (keyup)="updateKeystroke(box.value)"
+        />
+        <mat-error *ngIf="searchValueControl.hasError('required')"
+          >This field is required</mat-error
+        >
+      </mat-form-field>
+      <button mat-icon-button type="submit">
+        <mat-icon><i class="bi bi-search"></i></mat-icon>
+      </button>
+    </div>
+  </form>
+
   <h1 class="display-4" style="margin-top: 80px">User Guide</h1>
   <p class="body-1 body-text">
     The goal of the Entity Search Tool is to provice a central source for
-    information researching biblical entities such as people, places, books,
-    etc. The data from this tool is actively being compiled, but is still
-    incomplete. If something doesn't show up here, it is recommended that you
-    try searching the Dictionary Tool.
+    information researching biblical entities such as people, places, etc. The
+    data for this tool is actively being compiled, but is still incomplete. If
+    something doesn't show up here, it is recommended that you try searching the
+    Dictionary Tool.
+  </p>
+
+  <p class="body-1 body-text">
+    Note: The Entity Search Tool does not change the capitalization used in the
+    search, since it can vary across different search types, attributes, and
+    objects.
   </p>
 </div>

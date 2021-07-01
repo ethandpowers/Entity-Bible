@@ -27,8 +27,7 @@ export class EastonComponent implements OnInit, OnDestroy {
   searchParams: string[] = [
     'Term Label',
     'Dictionary Lookup',
-    'Term ID',
-    'Defintion ID',
+    'Definition ID',
     'Index',
   ];
 
@@ -56,7 +55,7 @@ export class EastonComponent implements OnInit, OnDestroy {
     if (this.searchParamValue == 'Term ID') {
       this.searchParamString = 'termID';
     }
-    if (typeof this.searchValue === 'string') {
+    if (typeof this.searchValue === 'string' && !(this.searchParamString == "def_id" || this.searchParamString == "termID")) {
       this.searchValue = this.capitalizeFirstLetter(this.searchValue);
     }
     this.sub = this.db
