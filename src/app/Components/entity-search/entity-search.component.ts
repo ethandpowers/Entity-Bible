@@ -44,7 +44,7 @@ export class EntitySearchComponent implements OnInit, OnDestroy {
           console.log(this.data);
           if (this.data.length == 0) {
             this._snackbar.open('No results in database', 'Search again', {
-              duration: 10000,
+              duration: 5000,
             });
             this.sub.unsubscribe();
             console.log('unsubscribed');
