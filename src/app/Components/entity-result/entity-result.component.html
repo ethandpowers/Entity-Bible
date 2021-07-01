@@ -49,7 +49,7 @@
             <tr *ngIf="item.fields.hasOwnProperty('alsoCalled')">
                 <td>AlsoCalled:</td>
                 <td>
-                  <p *ngFor="let name of item.fields.alsoCalled.split(',')">
+                  <p *ngFor="let name of item.fields.alsoCalled">
                     {{ name }}
                   </p>
                 </td>

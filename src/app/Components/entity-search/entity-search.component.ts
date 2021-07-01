@@ -99,6 +99,7 @@ export class EntitySearchComponent implements OnInit, OnDestroy {
       this.searchParams = [
         'Name',
         'Display Title',
+        'Also Called',
         'Birth Year',
         'Death Year',
         'Birth Place',
