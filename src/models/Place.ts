@@ -23,7 +23,7 @@ export class Place{
         openBibleLong:string,
         rootID:string[],
         precision:string,
-        aliases:string,
+        aliases:string | string[],
         comment:string,
         verses:string[],
         verseCount:number,

@@ -34,6 +34,10 @@ export class EntitySearchComponent implements OnInit, OnDestroy {
       this.TranslateParams();
       this.searchVal = this.searchValue;
 
+      console.log(this.typeVal);
+      console.log(this.paramVal);
+      console.log(this.searchVal);
+
       this.sub = this.db
         .collection(this.typeVal, (query) =>
           query.where(`fields.${this.paramVal}`, this.operator, this.searchVal)
@@ -69,7 +73,7 @@ export class EntitySearchComponent implements OnInit, OnDestroy {
   searchParams: string[] = [];
   searchTypes: string[] = [
     'Person',
-    'Place (Not Ready)',
+    'Place',
     'People Group (Not Ready)',
     'Period (Not Ready)',
     'Book (Not Ready)',
@@ -100,8 +104,6 @@ export class EntitySearchComponent implements OnInit, OnDestroy {
         'Name',
         'Display Title',
         'Also Called',
-        'Birth Year',
-        'Death Year',
         'Birth Place',
         'Death Place',
         'Siblings',
@@ -109,11 +111,21 @@ export class EntitySearchComponent implements OnInit, OnDestroy {
         'Father',
         'Children',
         'Partners',
-        'First Letter',
         'Unique Identifier',
         'Surname',
         'Chapters Written',
         'Person Lookup',
+      ];
+    } else if (this.searchTypeValue == 'Place') {
+      this.searchParams = [
+        'Display Title',
+        'Place Lookup',
+        'Aliases',
+        'Place ID',
+        'People Born',
+        'People Died',
+        'Books Written',
+        'Unique Identifier'
       ];
     } else {
       this.searchParams = [];
@@ -124,15 +136,15 @@ export class EntitySearchComponent implements OnInit, OnDestroy {
     if (this.searchTypeValue == 'Person') {
       this.typeVal = 'people';
     } else if (this.searchTypeValue == 'Place') {
-      this.typeVal == 'places';
+      this.typeVal = 'places';
     } else if (this.searchTypeValue == 'People Group') {
-      this.typeVal == 'peopleGroups';
+      this.typeVal = 'peopleGroups';
     } else if (this.searchTypeValue == 'Period') {
-      this.typeVal == 'periods';
+      this.typeVal = 'periods';
     } else if (this.searchTypeValue == 'Book') {
-      this.typeVal == 'books';
+      this.typeVal = 'books';
     } else if (this.searchTypeValue == 'Chapter') {
-      this.typeVal == 'chapters';
+      this.typeVal = 'chapters';
     }
   }
 
@@ -195,6 +207,38 @@ export class EntitySearchComponent implements OnInit, OnDestroy {
       } else if (this.searchParamValue == 'Chapters Written') {
         this.paramVal = 'chaptersWritten';
         this.operator = 'array-contains';
+      }
+    } else if (this.searchTypeValue == 'Place') {
+      if (this.searchParamValue == 'Place Lookup') {
+        this.paramVal = 'placeLookup';
+        this.operator = 'array-contains';
+      } else if (this.searchParamValue == 'Display Title') {
+        this.paramVal = 'displayTitle';
+        this.operator = '==';
+      } else if (this.searchParamValue == 'Aliases') {
+        this.paramVal = 'aliases';
+        this.operator = 'array-contains';
+      } else if (this.searchParamValue == 'Place ID') {
+        this.paramVal = 'placeID';
+        this.operator = '==';
+      } else if (this.searchParamValue == 'Latitude') {
+        this.paramVal = 'latitude';
+        this.operator = '==';
+      } else if (this.searchParamValue == 'Longitude') {
+        this.paramVal = 'longitude';
+        this.operator = 'array-contains';
+      } else if (this.searchParamValue == 'People Born') {
+        this.paramVal = 'peopleBorn';
+        this.operator = 'array-contains';
+      } else if (this.searchParamValue == 'People Died') {
+        this.paramVal = 'peopleDied';
+        this.operator = 'array-contains';
+      } else if (this.searchParamValue == 'Books Written') {
+        this.paramVal = 'booksWritten';
+        this.operator = 'array-contains';
+      } else if (this.searchParamValue == 'Unique Identifier') {
+        this.paramVal = 'slug';
+        this.operator = '==';
       }
     } else if (this.searchTypeValue == '') {
     }

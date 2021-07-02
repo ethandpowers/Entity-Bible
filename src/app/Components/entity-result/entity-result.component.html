@@ -27,8 +27,8 @@
             {{ item.fields.displayTitle }}
           </h1>
         </div>
-        <p class="fw-light">
-          {{ item.fields.dictText }}
+        <p class="fw-light" *ngFor="let def of item.fields.dictText">
+          {{ def }}
         </p>
         <table class="table">
           <thead>
@@ -47,13 +47,13 @@
               <td>{{ item.fields.personLookup }}</td>
             </tr>
             <tr *ngIf="item.fields.hasOwnProperty('alsoCalled')">
-                <td>AlsoCalled:</td>
-                <td>
-                  <p *ngFor="let name of item.fields.alsoCalled">
-                    {{ name }}
-                  </p>
-                </td>
-              </tr>
+              <td>AlsoCalled:</td>
+              <td>
+                <p *ngFor="let name of item.fields.alsoCalled">
+                  {{ name }}
+                </p>
+              </td>
+            </tr>
             <tr *ngIf="item.fields.hasOwnProperty('gender')">
               <td>Gender:</td>
               <td>{{ item.fields.gender }}</td>
@@ -121,41 +121,150 @@
               <td>{{ item.fields.slug }}</td>
             </tr>
             <tr *ngIf="item.fields.hasOwnProperty('surname')">
-                <td>Surname:</td>
-                <td>{{ item.fields.surname }}</td>
-              </tr>
-              <tr *ngIf="item.fields.hasOwnProperty('occupations')">
-                <td>Occupations:</td>
-                <td>
-                  <p *ngFor="let job of item.fields.occupations">
-                    {{ job }}
-                  </p>
-                </td>
-              </tr>
-              <tr *ngIf="item.fields.hasOwnProperty('halfSiblingsSameMother')">
-                <td>Half-Siblings W. Same Mother:</td>
-                <td>
-                  <p *ngFor="let kid of item.fields.halfSiblingsSameMotherhalfSiblingsSameMother">
-                    {{ kid }}
-                  </p>
-                </td>
-              </tr>
-              <tr *ngIf="item.fields.hasOwnProperty('halfSiblingsSameFather')">
-                <td>Half-Siblings W. Same Father:</td>
-                <td>
-                  <p *ngFor="let kid of item.fields.halfSiblingsSameMotherhalfSiblingsSameFather">
-                    {{ kid }}
-                  </p>
-                </td>
-              </tr>
-              <tr *ngIf="item.fields.hasOwnProperty('chaptersWritten')">
-                <td>Chapters Written:</td>
-                <td>
-                  <p *ngFor="let chap of item.fields.chaptersWritten">
-                    {{ chap }}
-                  </p>
-                </td>
-              </tr>
+              <td>Surname:</td>
+              <td>{{ item.fields.surname }}</td>
+            </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('occupations')">
+              <td>Occupations:</td>
+              <td>
+                <p *ngFor="let job of item.fields.occupations">
+                  {{ job }}
+                </p>
+              </td>
+            </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('halfSiblingsSameMother')">
+              <td>Half-Siblings W. Same Mother:</td>
+              <td>
+                <p
+                  *ngFor="
+                    let kid of item.fields
+                      .halfSiblingsSameMotherhalfSiblingsSameMother
+                  "
+                >
+                  {{ kid }}
+                </p>
+              </td>
+            </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('halfSiblingsSameFather')">
+              <td>Half-Siblings W. Same Father:</td>
+              <td>
+                <p
+                  *ngFor="
+                    let kid of item.fields
+                      .halfSiblingsSameMotherhalfSiblingsSameFather
+                  "
+                >
+                  {{ kid }}
+                </p>
+              </td>
+            </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('chaptersWritten')">
+              <td>Chapters Written:</td>
+              <td>
+                <p *ngFor="let chap of item.fields.chaptersWritten">
+                  {{ chap }}
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+
+  <mat-tab-group *ngIf="data[0].fields.hasOwnProperty('placeLookup')">
+    <mat-tab *ngFor="let item of data" [label]="item.fields.displayTitle">
+      <div class="mobile-center">
+        <div style="display: flex">
+          <h1
+            class="fw-light fs-1"
+            style="margin-top: 30px; margin-bottom: 20px"
+          >
+            {{ item.fields.displayTitle }}
+          </h1>
+        </div>
+        <p class="fw-light" *ngFor="let def of item.fields.dictText">
+          {{ def }}
+        </p>
+        <p *ngIf="item.fields.hasOwnProperty('comment')">
+          {{ item.fields.comment }}
+        </p>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Property</th>
+              <th scope="col">Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="item.fields.hasOwnProperty('aliases')">
+              <td>Duplicate of:</td>
+              <td>
+                <p *ngFor="let alias of item.fields.aliases">
+                  {{ alias }}
+                </p>
+              </td>
+            </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('duplicate_of')">
+              <td>Duplicate of:</td>
+              <td>
+                <p *ngFor="let duplicate of item.fields.duplicate_of">
+                  {{ duplicate }}
+                </p>
+              </td>
+            </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('placeID')">
+              <td>Name:</td>
+              <td>{{ item.fields.placeID }}</td>
+            </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('latitude')">
+              <td>Latitude:</td>
+              <td>{{ item.fields.latitude }}</td>
+            </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('longitude')">
+              <td>Longitude:</td>
+              <td>{{ item.fields.longitude }}</td>
+            </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('featureType')">
+              <td>Feature Type:</td>
+              <td>{{ item.fields.featureType }}</td>
+            </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('precision')">
+              <td>Precision:</td>
+              <td>{{ item.fields.precision }}</td>
+            </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('verseCount')">
+              <td>Verse Count:</td>
+              <td>{{ item.fields.verseCount }}</td>
+            </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('peopleBorn')">
+              <td>People Born:</td>
+              <td>
+                <p *ngFor="let person of item.fields.peopleBorn">
+                  {{ person }}
+                </p>
+              </td>
+            </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('peopleDied')">
+              <td>People Died:</td>
+              <td>
+                <p *ngFor="let person of item.fields.peopleDied">
+                  {{ person }}
+                </p>
+              </td>
+            </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('booksWritten')">
+              <td>Books Written:</td>
+              <td>
+                <p *ngFor="let book of item.fields.booksWritten">
+                  {{ book }}
+                </p>
+              </td>
+            </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('slug')">
+              <td>Unique Identifier:</td>
+              <td>{{ item.fields.slug }}</td>
+            </tr>
           </tbody>
         </table>
       </div>

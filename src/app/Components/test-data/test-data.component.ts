@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import * as rawData from 'src/assets/json/people.json';
+import * as rawData from 'src/assets/json/places.json';
 import { Book } from 'src/models/Book';
 import { Chapter } from 'src/models/Chapter';
 import { DictItem } from 'src/models/DictItem';
@@ -19,15 +19,15 @@ import { Verse } from 'src/models/Verse';
 export class TestDataComponent implements OnInit {
 
   constructor(private db:AngularFirestore){
-    //const collection = db.collection('people');
-    this.data = <Person[]><unknown>rawData;
+    //const collection = db.collection('places');
+    this.data = <Place[]><unknown>rawData;
     this.data = Array.from(this.data);
     
     this.data.forEach((item) => {
-      if(item.fields.alsoCalled != undefined){
-        if(typeof item.fields.alsoCalled == 'string'){
-          let str:string = item.fields.alsoCalled;
-          item.fields.alsoCalled = Array.from(str.split(','));
+      if(item.fields.aliases != undefined){
+        if(typeof item.fields.aliases == 'string'){
+          let str:string = item.fields.aliases;
+          item.fields.aliases = Array.from(str.split(','));
         } 
       }
     });
@@ -40,5 +40,5 @@ export class TestDataComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  data:Person[]
+  data:Place[]
 }
