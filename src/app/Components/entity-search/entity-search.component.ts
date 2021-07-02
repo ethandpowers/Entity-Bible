@@ -74,10 +74,10 @@ export class EntitySearchComponent implements OnInit, OnDestroy {
   searchTypes: string[] = [
     'Person',
     'Place',
-    'People Group (Not Ready)',
-    'Period (Not Ready)',
-    'Book (Not Ready)',
-    'Chapter (Not Ready)',
+    'People Group',
+    'Period (Coming Soon)',
+    'Book (Coming Soon)',
+    'Chapter (Coming Soon)',
   ];
   searchTypeValue: string = '';
   searchParamValue: string = '';
@@ -125,8 +125,10 @@ export class EntitySearchComponent implements OnInit, OnDestroy {
         'People Born',
         'People Died',
         'Books Written',
-        'Unique Identifier'
+        'Unique Identifier',
       ];
+    } else if (this.searchTypeValue == 'People Group') {
+      this.searchParams = ['Group Name', 'Members', 'verses'];
     } else {
       this.searchParams = [];
     }
@@ -239,6 +241,17 @@ export class EntitySearchComponent implements OnInit, OnDestroy {
       } else if (this.searchParamValue == 'Unique Identifier') {
         this.paramVal = 'slug';
         this.operator = '==';
+      }
+    } else if (this.searchTypeValue == 'People Group') {
+      if (this.searchParamValue == 'Group Name') {
+        this.paramVal = 'groupName';
+        this.operator = '==';
+      } else if (this.searchParamValue == 'Members') {
+        this.paramVal = 'members';
+        this.operator = 'array-contains';
+      } else if (this.searchParamValue == 'Verses') {
+        this.paramVal = 'verses';
+        this.operator = 'array-contains';
       }
     } else if (this.searchTypeValue == '') {
     }

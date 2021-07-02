@@ -270,4 +270,46 @@
       </div>
     </mat-tab>
   </mat-tab-group>
+
+  <mat-tab-group *ngIf="data[0].fields.hasOwnProperty('groupName')">
+    <mat-tab *ngFor="let item of data" [label]="item.fields.groupName">
+      <div class="mobile-center">
+        <div style="display: flex">
+          <h1
+            class="fw-light fs-1"
+            style="margin-top: 30px; margin-bottom: 20px"
+          >
+            {{ item.fields.groupName }}
+          </h1>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Property</th>
+              <th scope="col">Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="item.fields.hasOwnProperty('members')">
+              <td>Group Members:</td>
+              <td>
+                <p *ngFor="let member of item.fields.members">
+                  {{ member }}
+                </p>
+              </td>
+            </tr>
+            
+            <tr *ngIf="item.fields.hasOwnProperty('verses')">
+              <td>People Born:</td>
+              <td>
+                <p *ngFor="let verse of item.fields.verses">
+                  {{ verse }}
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
 </div>
