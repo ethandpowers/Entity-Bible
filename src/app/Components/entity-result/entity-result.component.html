@@ -312,4 +312,50 @@
       </div>
     </mat-tab>
   </mat-tab-group>
+
+  <mat-tab-group *ngIf="data[0].fields.hasOwnProperty('BC-AD')">
+    <mat-tab *ngFor="let item of data" [label]="item.fields.formattedYear">
+      <div class="mobile-center">
+        <div style="display: flex">
+          <h1
+            class="fw-light fs-1"
+            style="margin-top: 30px; margin-bottom: 20px"
+          >
+            {{ item.fields.formattedYear }}
+          </h1>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Property</th>
+              <th scope="col">Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="item.fields.hasOwnProperty('yearNum')">
+              <td>Year Number:</td>
+              <td>{{ item.fields.yearNum }}</td>
+            </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('booksWritten')">
+              <td>Books Written:</td>
+              <td>
+                <p *ngFor="let book of item.fields.booksWritten">
+                  {{ book }}
+                </p>
+              </td>
+            </tr>
+            
+            <tr *ngIf="item.fields.hasOwnProperty('events')">
+              <td>Events:</td>
+              <td>
+                <p *ngFor="let event of item.fields.events">
+                  {{ event }}
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
 </div>

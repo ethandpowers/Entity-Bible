@@ -75,7 +75,7 @@ export class EntitySearchComponent implements OnInit, OnDestroy {
     'Person',
     'Place',
     'People Group',
-    'Period (Coming Soon)',
+    'Period',
     'Book (Coming Soon)',
     'Chapter (Coming Soon)',
   ];
@@ -128,7 +128,16 @@ export class EntitySearchComponent implements OnInit, OnDestroy {
         'Unique Identifier',
       ];
     } else if (this.searchTypeValue == 'People Group') {
-      this.searchParams = ['Group Name', 'Members', 'verses'];
+      this.searchParams = ['Group Name', 'Members', 'Verses'];
+    } else if (this.searchTypeValue == 'Period') {
+      this.searchParams = [
+        'Year Number',
+        'Formatted Year',
+        'Books Written',
+        'Events',
+        'People Born',
+        'People Died'
+      ];
     } else {
       this.searchParams = [];
     }
@@ -251,6 +260,26 @@ export class EntitySearchComponent implements OnInit, OnDestroy {
         this.operator = 'array-contains';
       } else if (this.searchParamValue == 'Verses') {
         this.paramVal = 'verses';
+        this.operator = 'array-contains';
+      }
+    }else if (this.searchTypeValue == 'Period') {
+      if (this.searchParamValue == 'Year Number') {
+        this.paramVal = 'yearNum';
+        this.operator = '==';
+      } else if (this.searchParamValue == 'Formatted Year') {
+        this.paramVal = 'formattedYear';
+        this.operator = '==';
+      } else if (this.searchParamValue == 'Books Written') {
+        this.paramVal = 'booksWritten';
+        this.operator = 'array-contains';
+      } else if (this.searchParamValue == 'Events') {
+        this.paramVal = 'events';
+        this.operator = 'array-contains';
+      } else if (this.searchParamValue == 'People Born') {
+        this.paramVal = 'peopleBorn';
+        this.operator = 'array-contains';
+      } else if (this.searchParamValue == 'People Died') {
+        this.paramVal = 'peopleDied';
         this.operator = 'array-contains';
       }
     } else if (this.searchTypeValue == '') {
