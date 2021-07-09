@@ -358,4 +358,85 @@
       </div>
     </mat-tab>
   </mat-tab-group>
+
+  <mat-tab-group *ngIf="data[0].fields.hasOwnProperty('bookDiv')">
+    <mat-tab *ngFor="let item of data" [label]="item.fields.bookName">
+      <div class="mobile-center">
+        <div style="display: flex">
+          <h1
+            class="fw-light fs-1"
+            style="margin-top: 30px; margin-bottom: 20px"
+          >
+            {{ item.fields.bookName }}
+          </h1>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Property</th>
+              <th scope="col">Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="item.fields.hasOwnProperty('shortName')">
+              <td>Short Name:</td>
+              <td>{{ item.fields.shortName }}</td>
+            </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('testament')">
+              <td>Testament:</td>
+              <td>{{ item.fields.testament }}</td>
+            </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('bookDiv')">
+              <td>Category:</td>
+              <td>{{ item.fields.bookDiv }}</td>
+            </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('bookOrder')">
+              <td>Order:</td>
+              <td>{{ item.fields.bookOrder }}</td>
+            </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('chapterCount')">
+              <td>Chapter Count:</td>
+              <td>{{ item.fields.chapterCount }}</td>
+            </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('peopleCount')">
+              <td>People Count:</td>
+              <td>{{ item.fields.peopleCount }}</td>
+            </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('placeCount')">
+              <td>Place Count:</td>
+              <td>{{ item.fields.placeCount }}</td>
+            </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('yearWritten')">
+              <td>Year Written:</td>
+              <td>
+                <p *ngFor="let year of item.fields.yearWritten">
+                  {{ year }}
+                </p>
+              </td>
+            </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('placeWritten')">
+              <td>Place Written:</td>
+              <td>
+                <p *ngFor="let place of item.fields.placeWritten">
+                  {{ place }}
+                </p>
+              </td>
+            </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('writers')">
+              <td>Writers:</td>
+              <td>
+                <p *ngFor="let writer of item.fields.writers">
+                  {{ writer }}
+                </p>
+              </td>
+            </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('slug')">
+              <td>Unique Identifier:</td>
+              <td>{{ item.fields.slug }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
 </div>

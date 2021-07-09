@@ -76,8 +76,7 @@ export class EntitySearchComponent implements OnInit, OnDestroy {
     'Place',
     'People Group',
     'Period',
-    'Book (Coming Soon)',
-    'Chapter (Coming Soon)',
+    'Book'
   ];
   searchTypeValue: string = '';
   searchParamValue: string = '';
@@ -136,7 +135,18 @@ export class EntitySearchComponent implements OnInit, OnDestroy {
         'Books Written',
         'Events',
         'People Born',
-        'People Died'
+        'People Died',
+      ];
+    } else if (this.searchTypeValue == 'Book') {
+      this.searchParams = [
+        'Title',
+        'Short Name',
+        'Category',
+        'Order',
+        'Writer',
+        'Year Written',
+        'Place Written',
+        'Unique Identifier',
       ];
     } else {
       this.searchParams = [];
@@ -262,7 +272,7 @@ export class EntitySearchComponent implements OnInit, OnDestroy {
         this.paramVal = 'verses';
         this.operator = 'array-contains';
       }
-    }else if (this.searchTypeValue == 'Period') {
+    } else if (this.searchTypeValue == 'Period') {
       if (this.searchParamValue == 'Year Number') {
         this.paramVal = 'yearNum';
         this.operator = '==';
@@ -281,6 +291,32 @@ export class EntitySearchComponent implements OnInit, OnDestroy {
       } else if (this.searchParamValue == 'People Died') {
         this.paramVal = 'peopleDied';
         this.operator = 'array-contains';
+      }
+    } else if (this.searchTypeValue == 'Book') {
+      if (this.searchParamValue == 'Title') {
+        this.paramVal = 'bookName';
+        this.operator = '==';
+      } else if (this.searchParamValue == 'Short Name') {
+        this.paramVal = 'shortName';
+        this.operator = '==';
+      } else if (this.searchParamValue == 'Order') {
+        this.paramVal = 'bookOrder';
+        this.operator = '==';
+      } else if (this.searchParamValue == 'Category') {
+        this.paramVal = 'bookDiv';
+        this.operator = '==';
+      } else if (this.searchParamValue == 'Writer') {
+        this.paramVal = 'writers';
+        this.operator = 'array-contains';
+      } else if (this.searchParamValue == 'Year Written') {
+        this.paramVal = 'yearsWritten';
+        this.operator = 'array-contains';
+      } else if (this.searchParamValue == 'Place Written') {
+        this.paramVal = 'placeWritten';
+        this.operator = 'array-contains';
+      } else if (this.searchParamValue == 'Unique Identifier') {
+        this.paramVal = 'slug';
+        this.operator = '==';
       }
     } else if (this.searchTypeValue == '') {
     }
