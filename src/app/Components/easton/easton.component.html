@@ -3,7 +3,8 @@
     Search Easton's Bible Dictionary
   </h1>
 
-  <form autocomplete="off"
+  <form
+    autocomplete="off"
     class="form-center-mobile"
     style="margin-top: 30px; display: flex; align-items: top; flex-wrap: wrap"
     (ngSubmit)="searchEaston()"
@@ -66,25 +67,20 @@
       matches one entry/definition.
     </li>
     <li>
-      Term ID - A string of characters that uniquely identifies the term in the
-      dictionary.
-    </li>
-    <li>
-      Definition ID - A string of characters that uniquely identifies the
-      definition in the dictionary.
+      Text Contains - Searches for any entry where the text contains the string
+      entered in the search box.
     </li>
     <li>
       Index - An integer that represent the order of entry into the dictionary.
       Index 1 corresponds to the first entry in the dictionary.
     </li>
   </ul>
-  <p class="body-1 body-text"> 
+  <p class="body-1 body-text">
     Once you have selected one of the above options, enter the value you want to
     search for into the "Search Value" box to the right of the drop-down menu.
     To execute the search, press enter or click the search icon.
     <br /><br />Note: While the search function can sometimes correct
     capitalization, it is recommended that if you don't get any results, that
-    you try again with different capitalization.
-    <br><br>
+    you try again with different capitalization. <br /><br />
   </p>
 </div>
