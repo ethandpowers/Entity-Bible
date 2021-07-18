@@ -27,9 +27,11 @@
             {{ item.fields.displayTitle }}
           </h1>
         </div>
-        <p class="fw-light" *ngFor="let def of item.fields.dictText">
-          {{ def }}
-        </p>
+        <div *ngIf="item.fields.hasOwnProperty('dictText')">
+          <p class="fw-light" *ngFor="let def of item.fields.dictText">
+            {{ def }}
+          </p>
+        </div>
         <table class="table">
           <thead>
             <tr>
@@ -47,11 +49,9 @@
               <td>{{ item.fields.personLookup }}</td>
             </tr>
             <tr *ngIf="item.fields.hasOwnProperty('alsoCalled')">
-              <td>AlsoCalled:</td>
+              <td>Also Called:</td>
               <td>
-                <p *ngFor="let name of item.fields.alsoCalled">
-                  {{ name }}
-                </p>
+                <p *ngFor="let name of arrayFrom(item.fields.alsoCalled)">{{ name }}</p>
               </td>
             </tr>
             <tr *ngIf="item.fields.hasOwnProperty('gender')">
@@ -60,47 +60,47 @@
             </tr>
             <tr *ngIf="item.fields.hasOwnProperty('birthYear')">
               <td>Birth Year:</td>
-              <td>{{ item.fields.birthYear }}</td>
+              <td>{{ getYear(item.fields.birthYear) }}</td>
             </tr>
             <tr *ngIf="item.fields.hasOwnProperty('deathYear')">
               <td>Death Year:</td>
-              <td>{{ item.fields.deathYear }}</td>
+              <td>{{ getYear(item.fields.deathYear) }}</td>
             </tr>
             <tr *ngIf="item.fields.hasOwnProperty('memberOf')">
               <td>People Groups:</td>
               <td>
-                <p *ngFor="let group of item.fields.memberOf">{{ group }}</p>
+                <p *ngFor="let group of item.fields.memberOf">{{ getGroupName(group) }}</p>
               </td>
             </tr>
             <tr *ngIf="item.fields.hasOwnProperty('birthPlace')">
               <td>Birthplace:</td>
-              <td>{{ item.fields.birthPlace }}</td>
+              <td>{{ getDisplayTitle(item.fields.birthPlace) }}</td>
             </tr>
             <tr *ngIf="item.fields.hasOwnProperty('deathPlace')">
               <td>Deathplace:</td>
-              <td>{{ item.fields.deathPlace }}</td>
+              <td>{{ getDisplayTitle(item.fields.deathPlace) }}</td>
             </tr>
             <tr *ngIf="item.fields.hasOwnProperty('siblings')">
               <td>Siblings:</td>
               <td>
                 <p *ngFor="let sibling of item.fields.siblings">
-                  {{ sibling }}
+                  {{ getDisplayTitle(sibling) }}
                 </p>
               </td>
             </tr>
             <tr *ngIf="item.fields.hasOwnProperty('mother')">
               <td>Mother:</td>
-              <td>{{ item.fields.mother }}</td>
+              <td>{{ getDisplayTitle(item.fields.mother) }}</td>
             </tr>
             <tr *ngIf="item.fields.hasOwnProperty('father')">
               <td>Father:</td>
-              <td>{{ item.fields.father }}</td>
+              <td>{{ getDisplayTitle(item.fields.father) }}</td>
             </tr>
             <tr *ngIf="item.fields.hasOwnProperty('children')">
-              <td>Siblings:</td>
+              <td>Children:</td>
               <td>
                 <p *ngFor="let child of item.fields.children">
-                  {{ child }}
+                  {{ getDisplayTitle(child) }}
                 </p>
               </td>
             </tr>
@@ -108,7 +108,7 @@
               <td>Partners:</td>
               <td>
                 <p *ngFor="let partner of item.fields.partners">
-                  {{ partner }}
+                  {{ getDisplayTitle(partner) }}
                 </p>
               </td>
             </tr>
@@ -135,26 +135,16 @@
             <tr *ngIf="item.fields.hasOwnProperty('halfSiblingsSameMother')">
               <td>Half-Siblings W. Same Mother:</td>
               <td>
-                <p
-                  *ngFor="
-                    let kid of item.fields
-                      .halfSiblingsSameMotherhalfSiblingsSameMother
-                  "
-                >
-                  {{ kid }}
+                <p *ngFor="let kid of item.fields.halfSiblingsSameMother">
+                  {{ getDisplayTitle(kid) }}
                 </p>
               </td>
             </tr>
             <tr *ngIf="item.fields.hasOwnProperty('halfSiblingsSameFather')">
               <td>Half-Siblings W. Same Father:</td>
               <td>
-                <p
-                  *ngFor="
-                    let kid of item.fields
-                      .halfSiblingsSameMotherhalfSiblingsSameFather
-                  "
-                >
-                  {{ kid }}
+                <p *ngFor="let kid of item.fields.halfSiblingsSameFather">
+                  {{ getDisplayTitle(kid) }}
                 </p>
               </td>
             </tr>
@@ -162,7 +152,7 @@
               <td>Chapters Written:</td>
               <td>
                 <p *ngFor="let chap of item.fields.chaptersWritten">
-                  {{ chap }}
+                  {{ getChapterDisplay(chap) }}
                 </p>
               </td>
             </tr>
@@ -198,9 +188,9 @@
           </thead>
           <tbody>
             <tr *ngIf="item.fields.hasOwnProperty('aliases')">
-              <td>Duplicate of:</td>
+              <td>Aliases:</td>
               <td>
-                <p *ngFor="let alias of item.fields.aliases">
+                <p *ngFor="let alias of arrayFrom(item.fields.aliases)">
                   {{ alias }}
                 </p>
               </td>
@@ -212,10 +202,6 @@
                   {{ duplicate }}
                 </p>
               </td>
-            </tr>
-            <tr *ngIf="item.fields.hasOwnProperty('placeID')">
-              <td>Name:</td>
-              <td>{{ item.fields.placeID }}</td>
             </tr>
             <tr *ngIf="item.fields.hasOwnProperty('latitude')">
               <td>Latitude:</td>
@@ -241,7 +227,7 @@
               <td>People Born:</td>
               <td>
                 <p *ngFor="let person of item.fields.peopleBorn">
-                  {{ person }}
+                  {{ getDisplayTitle(person) }}
                 </p>
               </td>
             </tr>
@@ -249,7 +235,7 @@
               <td>People Died:</td>
               <td>
                 <p *ngFor="let person of item.fields.peopleDied">
-                  {{ person }}
+                  {{ getDisplayTitle(person) }}
                 </p>
               </td>
             </tr>
@@ -257,7 +243,7 @@
               <td>Books Written:</td>
               <td>
                 <p *ngFor="let book of item.fields.booksWritten">
-                  {{ book }}
+                  {{ getBookDisplay(book) }}
                 </p>
               </td>
             </tr>
@@ -294,16 +280,16 @@
               <td>Group Members:</td>
               <td>
                 <p *ngFor="let member of item.fields.members">
-                  {{ member }}
+                  {{ getDisplayTitle(member) }}
                 </p>
               </td>
             </tr>
-            
+
             <tr *ngIf="item.fields.hasOwnProperty('verses')">
-              <td>People Born:</td>
+              <td>Verses:</td>
               <td>
                 <p *ngFor="let verse of item.fields.verses">
-                  {{ verse }}
+                  {{ getVerse(verse) }}
                 </p>
               </td>
             </tr>
@@ -340,11 +326,11 @@
               <td>Books Written:</td>
               <td>
                 <p *ngFor="let book of item.fields.booksWritten">
-                  {{ book }}
+                  {{ getBookDisplay(book) }}
                 </p>
               </td>
             </tr>
-            
+
             <tr *ngIf="item.fields.hasOwnProperty('events')">
               <td>Events:</td>
               <td>
@@ -410,7 +396,7 @@
               <td>Year Written:</td>
               <td>
                 <p *ngFor="let year of item.fields.yearWritten">
-                  {{ year }}
+                  {{ getYear(year) }}
                 </p>
               </td>
             </tr>
@@ -418,7 +404,7 @@
               <td>Place Written:</td>
               <td>
                 <p *ngFor="let place of item.fields.placeWritten">
-                  {{ place }}
+                  {{ getDisplayTitle(place) }}
                 </p>
               </td>
             </tr>
@@ -426,13 +412,9 @@
               <td>Writers:</td>
               <td>
                 <p *ngFor="let writer of item.fields.writers">
-                  {{ writer }}
+                  {{ getPersonByLookup(writer) }}
                 </p>
               </td>
-            </tr>
-            <tr *ngIf="item.fields.hasOwnProperty('slug')">
-              <td>Unique Identifier:</td>
-              <td>{{ item.fields.slug }}</td>
             </tr>
           </tbody>
         </table>

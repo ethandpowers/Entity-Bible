@@ -43,7 +43,7 @@ export class Person {
     surname: string;
     occupations: string[];
     halfSiblingsSameMother: string[];
-    halfSiblingSameFather: string[];
+    halfSiblingsSameFather: string[];
     chaptersWritten: string[];
   };
   public createdTime!: string;

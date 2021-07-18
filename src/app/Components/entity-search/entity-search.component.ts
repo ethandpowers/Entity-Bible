@@ -2,21 +2,21 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { LocalEntitySearch } from 'src/models/EntitySearchAPI/LocalEntitySearch';
+import { Person } from 'src/models/Person';
 
 @Component({
   selector: 'app-entity-search',
   templateUrl: './entity-search.component.html',
   styleUrls: ['./entity-search.component.css'],
 })
-export class EntitySearchComponent implements OnInit, OnDestroy {
+export class EntitySearchComponent implements OnInit {
   constructor(
-    private db: AngularFirestore,
     private _snackbar: MatSnackBar,
     private _router: Router
   ) {
-    this.sub = new Subscription();
     this.data = [];
   }
 
@@ -28,36 +28,22 @@ export class EntitySearchComponent implements OnInit, OnDestroy {
       this.searchParamValue == '' ||
       this.searchValue == ''
     ) {
+      this._snackbar.open('Please enter valid search options', 'Try again', {
+        duration: 5000,
+      });
       return;
-    } else {
-      this.TranslateTypes();
-      this.TranslateParams();
-      this.searchVal = this.searchValue;
-
-      console.log(this.typeVal);
-      console.log(this.paramVal);
-      console.log(this.searchVal);
-
-      this.sub = this.db
-        .collection(this.typeVal, (query) =>
-          query.where(`fields.${this.paramVal}`, this.operator, this.searchVal)
-        )
-        .valueChanges()
-        .subscribe((val) => {
-          this.data = val;
-          console.log(this.data);
-          if (this.data.length == 0) {
-            this._snackbar.open('No results in database', 'Search again', {
-              duration: 5000,
-            });
-            this.sub.unsubscribe();
-            console.log('unsubscribed');
-            return;
-          }
-          this._router.navigate(['entity-result'], {
-            state: { data: this.data },
-          });
+    } 
+    else {
+      this.data = LocalEntitySearch.GetData(this.searchTypeValue, this.searchParamValue, this.searchValue);
+      console.log(this.data);
+      if(this.data.length < 1){
+        this._snackbar.open('No results found', 'Search again', {
+          duration: 5000,
         });
+        return;
+      }
+      this._router.navigate(['entity-result'], {
+        state: { data: this.data }});
     }
   }
 
@@ -65,35 +51,21 @@ export class EntitySearchComponent implements OnInit, OnDestroy {
     this.searchValue = input;
   }
 
-  ngOnDestroy() {
-    this.sub.unsubscribe();
-    console.log('unsubscribed');
-  }
-
   searchParams: string[] = [];
   searchTypes: string[] = [
     'Person',
     'Place',
     'People Group',
-    'Period',
     'Book'
   ];
   searchTypeValue: string = '';
   searchParamValue: string = '';
   searchValue: any = '';
   box: string = '';
-  searchParamString: string = '';
   searchTypeControl = new FormControl('', Validators.required);
   searchParamControl = new FormControl('', Validators.required);
   searchValueControl = new FormControl('', Validators.required);
-  dataType: string = '';
-  data: any[];
-  sub: Subscription;
-  operator: any = '';
-
-  typeVal: string = '';
-  paramVal: string = '';
-  searchVal: string | number = '';
+  data: any[] = [];
 
   GetSearchParams() {
     this.searchParamValue = '';
@@ -110,24 +82,17 @@ export class EntitySearchComponent implements OnInit, OnDestroy {
         'Father',
         'Children',
         'Partners',
-        'Unique Identifier',
         'Surname',
-        'Chapters Written',
-        'Person Lookup',
       ];
     } else if (this.searchTypeValue == 'Place') {
       this.searchParams = [
         'Display Title',
-        'Place Lookup',
         'Aliases',
-        'Place ID',
         'People Born',
-        'People Died',
-        'Books Written',
-        'Unique Identifier',
+        'People Died'
       ];
     } else if (this.searchTypeValue == 'People Group') {
-      this.searchParams = ['Group Name', 'Members', 'Verses'];
+      this.searchParams = ['Group Name', 'Members'];
     } else if (this.searchTypeValue == 'Period') {
       this.searchParams = [
         'Year Number',
@@ -145,180 +110,10 @@ export class EntitySearchComponent implements OnInit, OnDestroy {
         'Order',
         'Writer',
         'Year Written',
-        'Place Written',
-        'Unique Identifier',
+        'Place Written'
       ];
     } else {
       this.searchParams = [];
-    }
-  }
-
-  TranslateTypes() {
-    if (this.searchTypeValue == 'Person') {
-      this.typeVal = 'people';
-    } else if (this.searchTypeValue == 'Place') {
-      this.typeVal = 'places';
-    } else if (this.searchTypeValue == 'People Group') {
-      this.typeVal = 'peopleGroups';
-    } else if (this.searchTypeValue == 'Period') {
-      this.typeVal = 'periods';
-    } else if (this.searchTypeValue == 'Book') {
-      this.typeVal = 'books';
-    } else if (this.searchTypeValue == 'Chapter') {
-      this.typeVal = 'chapters';
-    }
-  }
-
-  TranslateParams() {
-    if (this.searchTypeValue == 'Person') {
-      if (this.searchParamValue == 'Person Lookup') {
-        this.paramVal = 'personLookup';
-        this.operator = '==';
-      } else if (this.searchParamValue == 'Person ID') {
-        this.paramVal = 'personID';
-        this.operator = '==';
-      } else if (this.searchParamValue == 'Name') {
-        this.paramVal = 'name';
-        this.operator = '==';
-      } else if (this.searchParamValue == 'Birth Year') {
-        this.paramVal = 'birthYear';
-        this.operator = 'array-contains';
-      } else if (this.searchParamValue == 'Death Year') {
-        this.paramVal = 'deathYear';
-        this.operator = 'array-contains';
-      } else if (this.searchParamValue == 'Birth Place') {
-        this.paramVal = 'birthPlace';
-        this.operator = 'array-contains';
-      } else if (this.searchParamValue == 'Death Place') {
-        this.paramVal = 'deathPlace';
-        this.operator = 'array-contains';
-      } else if (this.searchParamValue == 'Siblings') {
-        this.paramVal = 'siblings';
-        this.operator = 'array-contains';
-      } else if (this.searchParamValue == 'Mother') {
-        this.paramVal = 'mother';
-        this.operator = 'array-contains';
-      } else if (this.searchParamValue == 'Father') {
-        this.paramVal = 'father';
-        this.operator = 'array-contains';
-      } else if (this.searchParamValue == 'Children') {
-        this.paramVal = 'children';
-        this.operator = 'array-contains';
-      } else if (this.searchParamValue == 'Display Title') {
-        this.paramVal = 'displayTitle';
-        this.operator = '==';
-      } else if (this.searchParamValue == 'Partners') {
-        this.paramVal = 'partners';
-        this.operator = 'array-contains';
-      } else if (this.searchParamValue == 'First Letter') {
-        this.paramVal = 'alphaGroup';
-        this.operator = '==';
-      } else if (this.searchParamValue == 'Unique Identifier') {
-        this.paramVal = 'slug';
-        this.operator = '==';
-      } else if (this.searchParamValue == 'Also Called') {
-        this.paramVal = 'alsoCalled';
-        this.operator = 'array-contains';
-      } else if (this.searchParamValue == 'Surname') {
-        this.paramVal = 'surname';
-        this.operator = '==';
-      } else if (this.searchParamValue == 'Occupations') {
-        this.paramVal = 'occupations';
-        this.operator = 'array-contains';
-      } else if (this.searchParamValue == 'Chapters Written') {
-        this.paramVal = 'chaptersWritten';
-        this.operator = 'array-contains';
-      }
-    } else if (this.searchTypeValue == 'Place') {
-      if (this.searchParamValue == 'Place Lookup') {
-        this.paramVal = 'placeLookup';
-        this.operator = 'array-contains';
-      } else if (this.searchParamValue == 'Display Title') {
-        this.paramVal = 'displayTitle';
-        this.operator = '==';
-      } else if (this.searchParamValue == 'Aliases') {
-        this.paramVal = 'aliases';
-        this.operator = 'array-contains';
-      } else if (this.searchParamValue == 'Place ID') {
-        this.paramVal = 'placeID';
-        this.operator = '==';
-      } else if (this.searchParamValue == 'Latitude') {
-        this.paramVal = 'latitude';
-        this.operator = '==';
-      } else if (this.searchParamValue == 'Longitude') {
-        this.paramVal = 'longitude';
-        this.operator = 'array-contains';
-      } else if (this.searchParamValue == 'People Born') {
-        this.paramVal = 'peopleBorn';
-        this.operator = 'array-contains';
-      } else if (this.searchParamValue == 'People Died') {
-        this.paramVal = 'peopleDied';
-        this.operator = 'array-contains';
-      } else if (this.searchParamValue == 'Books Written') {
-        this.paramVal = 'booksWritten';
-        this.operator = 'array-contains';
-      } else if (this.searchParamValue == 'Unique Identifier') {
-        this.paramVal = 'slug';
-        this.operator = '==';
-      }
-    } else if (this.searchTypeValue == 'People Group') {
-      if (this.searchParamValue == 'Group Name') {
-        this.paramVal = 'groupName';
-        this.operator = '==';
-      } else if (this.searchParamValue == 'Members') {
-        this.paramVal = 'members';
-        this.operator = 'array-contains';
-      } else if (this.searchParamValue == 'Verses') {
-        this.paramVal = 'verses';
-        this.operator = 'array-contains';
-      }
-    } else if (this.searchTypeValue == 'Period') {
-      if (this.searchParamValue == 'Year Number') {
-        this.paramVal = 'yearNum';
-        this.operator = '==';
-      } else if (this.searchParamValue == 'Formatted Year') {
-        this.paramVal = 'formattedYear';
-        this.operator = '==';
-      } else if (this.searchParamValue == 'Books Written') {
-        this.paramVal = 'booksWritten';
-        this.operator = 'array-contains';
-      } else if (this.searchParamValue == 'Events') {
-        this.paramVal = 'events';
-        this.operator = 'array-contains';
-      } else if (this.searchParamValue == 'People Born') {
-        this.paramVal = 'peopleBorn';
-        this.operator = 'array-contains';
-      } else if (this.searchParamValue == 'People Died') {
-        this.paramVal = 'peopleDied';
-        this.operator = 'array-contains';
-      }
-    } else if (this.searchTypeValue == 'Book') {
-      if (this.searchParamValue == 'Title') {
-        this.paramVal = 'bookName';
-        this.operator = '==';
-      } else if (this.searchParamValue == 'Short Name') {
-        this.paramVal = 'shortName';
-        this.operator = '==';
-      } else if (this.searchParamValue == 'Order') {
-        this.paramVal = 'bookOrder';
-        this.operator = '==';
-      } else if (this.searchParamValue == 'Category') {
-        this.paramVal = 'bookDiv';
-        this.operator = '==';
-      } else if (this.searchParamValue == 'Writer') {
-        this.paramVal = 'writers';
-        this.operator = 'array-contains';
-      } else if (this.searchParamValue == 'Year Written') {
-        this.paramVal = 'yearsWritten';
-        this.operator = 'array-contains';
-      } else if (this.searchParamValue == 'Place Written') {
-        this.paramVal = 'placeWritten';
-        this.operator = 'array-contains';
-      } else if (this.searchParamValue == 'Unique Identifier') {
-        this.paramVal = 'slug';
-        this.operator = '==';
-      }
-    } else if (this.searchTypeValue == '') {
     }
   }
 }
