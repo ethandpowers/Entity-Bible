@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "BibleResearchApp2": {
+    "BibleResearchApp": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/BibleResearchApp2",
+            "outputPath": "dist/BibleResearchApp",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -71,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "BibleResearchApp2:build:production"
+              "browserTarget": "BibleResearchApp:build:production"
             },
             "development": {
-              "browserTarget": "BibleResearchApp2:build:development"
+              "browserTarget": "BibleResearchApp:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -82,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "BibleResearchApp2:build"
+            "browserTarget": "BibleResearchApp:build"
           }
         },
         "test": {
@@ -112,5 +112,5 @@
       }
     }
   },
-  "defaultProject": "BibleResearchApp2"
+  "defaultProject": "BibleResearchApp"
 }
