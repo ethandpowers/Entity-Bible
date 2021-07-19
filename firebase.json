@@ -1,10 +1,6 @@
 {
-  "firestore": {
-    "rules": "firestore.rules",
-    "indexes": "firestore.indexes.json"
-  },
   "hosting": {
-    "public": "dist/BibleResearchApp",
+    "public": "dist",
     "ignore": [
       "firebase.json",
       "**/.*",
