@@ -30,9 +30,9 @@ import { EntityResultComponent } from './Components/entity-result/entity-result.
 
 const fireBaseConfig = {
   apiKey: "AIzaSyCVQhRPtS9o0ORW0aaT9bjvrbGy1Ptrco4",
-    authDomain: "bibleresearchapp.firebaseapp.com",
-    projectId: "bibleresearchapp",
-    storageBucket: "bibleresearchapp.appspot.com",
+    authDomain: "EntityBible.firebaseapp.com",
+    projectId: "EntityBible",
+    storageBucket: "EntityBible.appspot.com",
     messagingSenderId: "485881278793",
     appId: "1:485881278793:web:560499e631fee67bdc6a98",
     measurementId: "G-CX9YQ3XCVL"
