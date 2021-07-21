@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IdTranslator } from 'src/models/IdTranslator';
 
 @Component({
@@ -8,7 +8,7 @@ import { IdTranslator } from 'src/models/IdTranslator';
   styleUrls: ['./entity-result.component.css'],
 })
 export class EntityResultComponent implements OnInit {
-  constructor(private _router: Router) {
+  constructor(private _router: Router, private _activatedRoute:ActivatedRoute) {
     this.data = history.state.data;
     if (this.data == undefined) {
       this._router.navigate(['404']);
@@ -85,6 +85,30 @@ export class EntityResultComponent implements OnInit {
       return person.fields.displayTitle;
     }
     return lookup;
+  }
+
+  getEventTitle(id: string) {
+    let event = IdTranslator.fromId(id);
+    if (event != undefined) {
+      return event.fields.title;
+    }
+    return '';
+  }
+
+  dataFromId(id:string){
+    let entity = IdTranslator.fromId(id);
+    let arr:any[] = [];
+    arr.push(entity);
+    window.scrollTo(0, 0);
+    this.data = arr;
+  }
+
+  dataFromPersonLookup(id:string){
+    let entity = IdTranslator.fromPersonLookup(id);
+    let arr:any[] = [];
+    arr.push(entity);
+    window.scrollTo(0, 0);
+    this.data = arr;
   }
 
   data: any[] = [];

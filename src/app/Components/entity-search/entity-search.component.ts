@@ -13,10 +13,7 @@ import { Person } from 'src/models/Person';
   styleUrls: ['./entity-search.component.css'],
 })
 export class EntitySearchComponent implements OnInit {
-  constructor(
-    private _snackbar: MatSnackBar,
-    private _router: Router
-  ) {
+  constructor(private _snackbar: MatSnackBar, private _router: Router) {
     this.data = [];
   }
 
@@ -32,18 +29,24 @@ export class EntitySearchComponent implements OnInit {
         duration: 5000,
       });
       return;
-    } 
-    else {
-      this.data = LocalEntitySearch.GetData(this.searchTypeValue, this.searchParamValue, this.searchValue);
+    } else {
+      this.isSearching = true;
+      this.data = LocalEntitySearch.GetData(
+        this.searchTypeValue,
+        this.searchParamValue,
+        this.searchValue
+      );
       console.log(this.data);
-      if(this.data.length < 1){
+      if (this.data.length < 1) {
         this._snackbar.open('No results found', 'Search again', {
           duration: 5000,
         });
+        this.isSearching = false;
         return;
       }
       this._router.navigate(['entity-result'], {
-        state: { data: this.data }});
+        state: { data: this.data },
+      });
     }
   }
 
@@ -51,13 +54,9 @@ export class EntitySearchComponent implements OnInit {
     this.searchValue = input;
   }
 
+  isSearching:boolean = false;
   searchParams: string[] = [];
-  searchTypes: string[] = [
-    'Person',
-    'Place',
-    'People Group',
-    'Book'
-  ];
+  searchTypes: string[] = ['Person', 'Place', 'People Group', 'Book', 'Event'];
   searchTypeValue: string = '';
   searchParamValue: string = '';
   searchValue: any = '';
@@ -89,10 +88,12 @@ export class EntitySearchComponent implements OnInit {
         'Display Title',
         'Aliases',
         'People Born',
-        'People Died'
+        'People Died',
       ];
     } else if (this.searchTypeValue == 'People Group') {
       this.searchParams = ['Group Name', 'Members'];
+    } else if (this.searchTypeValue == 'Event') {
+      this.searchParams = ['Title', 'Participant', 'Location', 'Part Of'];
     } else if (this.searchTypeValue == 'Period') {
       this.searchParams = [
         'Year Number',
@@ -110,7 +111,7 @@ export class EntitySearchComponent implements OnInit {
         'Order',
         'Writer',
         'Year Written',
-        'Place Written'
+        'Place Written',
       ];
     } else {
       this.searchParams = [];

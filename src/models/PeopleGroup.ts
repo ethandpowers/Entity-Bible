@@ -1,5 +1,3 @@
-import { NumberSymbol } from "@angular/common";
-
 export class PeopleGroup{ 
     constructor(isDummy?:boolean){
         if(isDummy){

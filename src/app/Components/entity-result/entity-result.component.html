@@ -44,14 +44,12 @@
               <td>Name:</td>
               <td>{{ item.fields.name }}</td>
             </tr>
-            <tr *ngIf="item.fields.hasOwnProperty('personLookup')">
-              <td>Person Lookup:</td>
-              <td>{{ item.fields.personLookup }}</td>
-            </tr>
             <tr *ngIf="item.fields.hasOwnProperty('alsoCalled')">
               <td>Also Called:</td>
               <td>
-                <p *ngFor="let name of arrayFrom(item.fields.alsoCalled)">{{ name }}</p>
+                <p *ngFor="let name of arrayFrom(item.fields.alsoCalled)">
+                  {{ name }}
+                </p>
               </td>
             </tr>
             <tr *ngIf="item.fields.hasOwnProperty('gender')">
@@ -60,46 +58,84 @@
             </tr>
             <tr *ngIf="item.fields.hasOwnProperty('birthYear')">
               <td>Birth Year:</td>
-              <td>{{ getYear(item.fields.birthYear) }}</td>
+              <td>
+                <p (click)="dataFromId(item.fields.birthYear)" class="p-click">
+                  {{ getYear(item.fields.birthYear) }}
+                </p>
+              </td>
             </tr>
             <tr *ngIf="item.fields.hasOwnProperty('deathYear')">
               <td>Death Year:</td>
-              <td>{{ getYear(item.fields.deathYear) }}</td>
+              <td>
+                <p (click)="dataFromId(item.fields.deathYear)" class="p-click">
+                  {{ getYear(item.fields.deathYear) }}
+                </p>
+              </td>
             </tr>
             <tr *ngIf="item.fields.hasOwnProperty('memberOf')">
               <td>People Groups:</td>
               <td>
-                <p *ngFor="let group of item.fields.memberOf">{{ getGroupName(group) }}</p>
+                <p
+                  *ngFor="let group of item.fields.memberOf"
+                  (click)="dataFromId(group)"
+                  class="p-click"
+                >
+                  {{ getGroupName(group) }}
+                </p>
               </td>
             </tr>
             <tr *ngIf="item.fields.hasOwnProperty('birthPlace')">
               <td>Birthplace:</td>
-              <td>{{ getDisplayTitle(item.fields.birthPlace) }}</td>
+              <td>
+                <p (click)="dataFromId(item.fields.birthPlace)" class="p-click">
+                  {{ getDisplayTitle(item.fields.birthPlace) }}
+                </p>
+              </td>
             </tr>
             <tr *ngIf="item.fields.hasOwnProperty('deathPlace')">
               <td>Deathplace:</td>
-              <td>{{ getDisplayTitle(item.fields.deathPlace) }}</td>
+              <td>
+                <p (click)="dataFromId(item.fields.deathPlace)" class="p-click">
+                  {{ getDisplayTitle(item.fields.deathPlace) }}
+                </p>
+              </td>
             </tr>
             <tr *ngIf="item.fields.hasOwnProperty('siblings')">
               <td>Siblings:</td>
               <td>
-                <p *ngFor="let sibling of item.fields.siblings">
+                <p
+                  *ngFor="let sibling of item.fields.siblings"
+                  (click)="dataFromId(sibling)"
+                  class="p-click"
+                >
                   {{ getDisplayTitle(sibling) }}
                 </p>
               </td>
             </tr>
             <tr *ngIf="item.fields.hasOwnProperty('mother')">
               <td>Mother:</td>
-              <td>{{ getDisplayTitle(item.fields.mother) }}</td>
+              <td>
+                <p (click)="dataFromId(item.fields.mother)" class="p-click">
+                  {{ getDisplayTitle(item.fields.mother) }}
+                </p>
+              </td>
             </tr>
             <tr *ngIf="item.fields.hasOwnProperty('father')">
               <td>Father:</td>
-              <td>{{ getDisplayTitle(item.fields.father) }}</td>
+              <td>
+                <p (click)="dataFromId(item.fields.father)" class="p-click">
+                  {{ getDisplayTitle(item.fields.father) }}
+                </p>
+              </td>
             </tr>
             <tr *ngIf="item.fields.hasOwnProperty('children')">
               <td>Children:</td>
               <td>
-                <p *ngFor="let child of item.fields.children">
+                <p
+                  *ngFor="let child of item.fields.children"
+                  (click)="dataFromId(child)"
+                  class="p-click"
+                >
                   {{ getDisplayTitle(child) }}
                 </p>
               </td>
@@ -107,7 +143,11 @@
             <tr *ngIf="item.fields.hasOwnProperty('partners')">
               <td>Partners:</td>
               <td>
-                <p *ngFor="let partner of item.fields.partners">
+                <p
+                  *ngFor="let partner of item.fields.partners"
+                  (click)="dataFromId(partner)"
+                  class="p-click"
+                >
                   {{ getDisplayTitle(partner) }}
                 </p>
               </td>
@@ -116,10 +156,6 @@
               <td>Verse Count:</td>
               <td>{{ item.fields.verseCount }}</td>
             </tr>
-            <tr *ngIf="item.fields.hasOwnProperty('slug')">
-              <td>Unique Identifier:</td>
-              <td>{{ item.fields.slug }}</td>
-            </tr>
             <tr *ngIf="item.fields.hasOwnProperty('surname')">
               <td>Surname:</td>
               <td>{{ item.fields.surname }}</td>
@@ -127,7 +163,11 @@
             <tr *ngIf="item.fields.hasOwnProperty('occupations')">
               <td>Occupations:</td>
               <td>
-                <p *ngFor="let job of item.fields.occupations">
+                <p
+                  *ngFor="let job of item.fields.occupations"
+                  (click)="dataFromId(job)"
+                  class="p-click"
+                >
                   {{ job }}
                 </p>
               </td>
@@ -135,7 +175,11 @@
             <tr *ngIf="item.fields.hasOwnProperty('halfSiblingsSameMother')">
               <td>Half-Siblings W. Same Mother:</td>
               <td>
-                <p *ngFor="let kid of item.fields.halfSiblingsSameMother">
+                <p
+                  *ngFor="let kid of item.fields.halfSiblingsSameMother"
+                  (click)="dataFromId(kid)"
+                  class="p-click"
+                >
                   {{ getDisplayTitle(kid) }}
                 </p>
               </td>
@@ -143,7 +187,11 @@
             <tr *ngIf="item.fields.hasOwnProperty('halfSiblingsSameFather')">
               <td>Half-Siblings W. Same Father:</td>
               <td>
-                <p *ngFor="let kid of item.fields.halfSiblingsSameFather">
+                <p
+                  *ngFor="let kid of item.fields.halfSiblingsSameFather"
+                  (click)="dataFromId(kid)"
+                  class="p-click"
+                >
                   {{ getDisplayTitle(kid) }}
                 </p>
               </td>
@@ -153,6 +201,18 @@
               <td>
                 <p *ngFor="let chap of item.fields.chaptersWritten">
                   {{ getChapterDisplay(chap) }}
+                </p>
+              </td>
+            </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('events')">
+              <td>Events:</td>
+              <td>
+                <p
+                  *ngFor="let event of item.fields.events"
+                  (click)="dataFromId(event)"
+                  class="p-click"
+                >
+                  {{ getEventTitle(event) }}
                 </p>
               </td>
             </tr>
@@ -223,10 +283,26 @@
               <td>Verse Count:</td>
               <td>{{ item.fields.verseCount }}</td>
             </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('eventsHere')">
+              <td>Events:</td>
+              <td>
+                <p
+                  *ngFor="let event of item.fields.eventsHere"
+                  (click)="dataFromId(event)"
+                  class="p-click"
+                >
+                  {{ getEventTitle(event) }}
+                </p>
+              </td>
+            </tr>
             <tr *ngIf="item.fields.hasOwnProperty('peopleBorn')">
               <td>People Born:</td>
               <td>
-                <p *ngFor="let person of item.fields.peopleBorn">
+                <p
+                  *ngFor="let person of item.fields.peopleBorn"
+                  (click)="dataFromId(person)"
+                  class="p-click"
+                >
                   {{ getDisplayTitle(person) }}
                 </p>
               </td>
@@ -234,7 +310,11 @@
             <tr *ngIf="item.fields.hasOwnProperty('peopleDied')">
               <td>People Died:</td>
               <td>
-                <p *ngFor="let person of item.fields.peopleDied">
+                <p
+                  *ngFor="let person of item.fields.peopleDied"
+                  (click)="dataFromId(person)"
+                  class="p-click"
+                >
                   {{ getDisplayTitle(person) }}
                 </p>
               </td>
@@ -242,14 +322,14 @@
             <tr *ngIf="item.fields.hasOwnProperty('booksWritten')">
               <td>Books Written:</td>
               <td>
-                <p *ngFor="let book of item.fields.booksWritten">
+                <p
+                  *ngFor="let book of item.fields.booksWritten"
+                  (click)="dataFromId(book)"
+                  class="p-click"
+                >
                   {{ getBookDisplay(book) }}
                 </p>
               </td>
-            </tr>
-            <tr *ngIf="item.fields.hasOwnProperty('slug')">
-              <td>Unique Identifier:</td>
-              <td>{{ item.fields.slug }}</td>
             </tr>
           </tbody>
         </table>
@@ -279,12 +359,27 @@
             <tr *ngIf="item.fields.hasOwnProperty('members')">
               <td>Group Members:</td>
               <td>
-                <p *ngFor="let member of item.fields.members">
+                <p
+                  *ngFor="let member of item.fields.members"
+                  (click)="dataFromId(member)"
+                  class="p-click"
+                >
                   {{ getDisplayTitle(member) }}
                 </p>
               </td>
             </tr>
-
+            <tr *ngIf="item.fields.hasOwnProperty('events_dev')">
+              <td>Events:</td>
+              <td>
+                <p
+                  *ngFor="let event of item.fields.events_dev"
+                  (click)="dataFromId(event)"
+                  class="p-click"
+                >
+                  {{ getEventTitle(event) }}
+                </p>
+              </td>
+            </tr>
             <tr *ngIf="item.fields.hasOwnProperty('verses')">
               <td>Verses:</td>
               <td>
@@ -320,12 +415,20 @@
           <tbody>
             <tr *ngIf="item.fields.hasOwnProperty('yearNum')">
               <td>Year Number:</td>
-              <td>{{ item.fields.yearNum }}</td>
+              <td>
+                <p>
+                  {{ item.fields.yearNum }}
+                </p>
+              </td>
             </tr>
             <tr *ngIf="item.fields.hasOwnProperty('booksWritten')">
               <td>Books Written:</td>
               <td>
-                <p *ngFor="let book of item.fields.booksWritten">
+                <p
+                  *ngFor="let book of item.fields.booksWritten"
+                  (click)="dataFromId(book)"
+                  class="p-click"
+                >
                   {{ getBookDisplay(book) }}
                 </p>
               </td>
@@ -395,7 +498,8 @@
             <tr *ngIf="item.fields.hasOwnProperty('yearWritten')">
               <td>Year Written:</td>
               <td>
-                <p *ngFor="let year of item.fields.yearWritten">
+                <p *ngFor="let year of item.fields.yearWritten" (click)="dataFromId(year)"
+                class="p-click">
                   {{ getYear(year) }}
                 </p>
               </td>
@@ -403,7 +507,8 @@
             <tr *ngIf="item.fields.hasOwnProperty('placeWritten')">
               <td>Place Written:</td>
               <td>
-                <p *ngFor="let place of item.fields.placeWritten">
+                <p *ngFor="let place of item.fields.placeWritten" (click)="dataFromId(place)"
+                class="p-click">
                   {{ getDisplayTitle(place) }}
                 </p>
               </td>
@@ -411,8 +516,120 @@
             <tr *ngIf="item.fields.hasOwnProperty('writers')">
               <td>Writers:</td>
               <td>
-                <p *ngFor="let writer of item.fields.writers">
+                <p *ngFor="let writer of item.fields.writers" (click)="dataFromPersonLookup(writer)"
+                class="p-click">
                   {{ getPersonByLookup(writer) }}
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+
+  <mat-tab-group *ngIf="data[0].fields.hasOwnProperty('duration')">
+    <mat-tab *ngFor="let item of data" [label]="item.fields.title">
+      <div class="mobile-center">
+        <div style="display: flex">
+          <h1
+            class="fw-light fs-1"
+            style="margin-top: 30px; margin-bottom: 20px"
+          >
+            {{ item.fields.title }}
+          </h1>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Property</th>
+              <th scope="col">Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="item.fields.hasOwnProperty('startDate')">
+              <td>Start Date:</td>
+              <td>
+                <p>
+                  {{ item.fields.startDate }}
+                </p>
+              </td>
+            </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('duration')">
+              <td>Duration:</td>
+              <td>
+                <p>
+                  {{ item.fields.duration }}
+                </p>
+              </td>
+            </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('participants')">
+              <td>Participants:</td>
+              <td>
+                <p
+                  *ngFor="let person of item.fields.participants"
+                  (click)="dataFromId(person)"
+                  class="p-click"
+                >
+                  {{ getDisplayTitle(person) }}
+                </p>
+              </td>
+            </tr>
+
+            <tr *ngIf="item.fields.hasOwnProperty('locations')">
+              <td>Locations:</td>
+              <td>
+                <p
+                  *ngFor="let place of item.fields.locations"
+                  (click)="dataFromId(place)"
+                  class="p-click"
+                >
+                  {{ getDisplayTitle(place) }}
+                </p>
+              </td>
+            </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('predecessor')">
+              <td>Predecessor:</td>
+              <td>
+                <p
+                  *ngFor="let event of item.fields.predecessor"
+                  (click)="dataFromId(event)"
+                  class="p-click"
+                >
+                  {{ getEventTitle(event) }}
+                </p>
+              </td>
+            </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('partOf')">
+              <td>Part Of:</td>
+              <td>
+                <p
+                  *ngFor="let event of item.fields.partOf"
+                  (click)="dataFromId(event)"
+                  class="p-click"
+                >
+                  {{ getEventTitle(event) }}
+                </p>
+              </td>
+            </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('groups')">
+              <td>Groups:</td>
+              <td>
+                <p
+                  *ngFor="let group of item.fields.groups"
+                  (click)="dataFromId(group)"
+                  class="p-click"
+                >
+                  {{ getGroupName(group) }}
+                </p>
+              </td>
+            </tr>
+            <tr *ngIf="item.fields.hasOwnProperty('verses')">
+              <td>Verses:</td>
+              <td>
+                <p
+                  *ngFor="let verse of item.fields.verses">
+                  {{ getVerse(verse) }}
                 </p>
               </td>
             </tr>

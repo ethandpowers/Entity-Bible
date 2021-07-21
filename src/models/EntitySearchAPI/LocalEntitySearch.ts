@@ -3,6 +3,7 @@ import { PeopleGroupSearch } from './PeopleGroupSearch';
 import { PeriodSearch } from './PeriodSearch';
 import { PersonSearch } from './PersonSearch';
 import { PlaceSearch } from './PlaceSearch';
+import { EventSearch } from './EventSearch';
 
 export class LocalEntitySearch {
   static GetData(searchType: string, searchParam: string, searchValue: string) {
@@ -16,6 +17,10 @@ export class LocalEntitySearch {
       return PeriodSearch.GetData(searchParam, searchValue);
     } else if (searchType == 'Book') {
       return BookSearch.GetData(searchParam, searchValue);
+    } else if (searchType == 'Book') {
+      return BookSearch.GetData(searchParam, searchValue);
+    } else if (searchType == 'Event') {
+      return EventSearch.GetData(searchParam, searchValue);
     } else {
       return [];
     }

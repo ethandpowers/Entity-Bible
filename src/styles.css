@@ -12,6 +12,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; height: 100
     margin-top:50px;
 }
 
+.p-click{
+    color:blue;
+}
+
 
 @media (max-width: 1000px) {
 

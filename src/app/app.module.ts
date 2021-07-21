@@ -14,6 +14,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTab, MatTabsModule} from '@angular/material/tabs';
+import {MatProgressSpinnerModule, MatSpinner} from '@angular/material/progress-spinner';
 
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
@@ -68,7 +69,8 @@ const fireBaseConfig = {
     MatIconModule,
     FormsModule,
     MatSnackBarModule,
-    MatTabsModule
+    MatTabsModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

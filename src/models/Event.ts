@@ -1,5 +1,3 @@
-import { StringMap } from "@angular/compiler/src/compiler_facade_interface";
-
 export class Event{ 
     constructor(isDummy?:boolean){
         if(isDummy){
