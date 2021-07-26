@@ -8,7 +8,7 @@ import { IdTranslator } from 'src/models/IdTranslator';
   styleUrls: ['./entity-result.component.css'],
 })
 export class EntityResultComponent implements OnInit {
-  constructor(private _router: Router, private _activatedRoute:ActivatedRoute) {
+  constructor(private _router: Router) {
     this.data = history.state.data;
     if (this.data == undefined) {
       this._router.navigate(['404']);

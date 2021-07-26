@@ -56,7 +56,7 @@ export class EntitySearchComponent implements OnInit {
 
   isSearching:boolean = false;
   searchParams: string[] = [];
-  searchTypes: string[] = ['Person', 'Place', 'People Group', 'Book', 'Event'];
+  searchTypes: string[] = ['Person', 'Place', 'People Group', 'Event',  'Book'];
   searchTypeValue: string = '';
   searchParamValue: string = '';
   searchValue: any = '';

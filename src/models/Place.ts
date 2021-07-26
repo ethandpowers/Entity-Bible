@@ -8,7 +8,7 @@ export class Place{
     }
     public id!:string;
     public fields!:{
-        placeLookup:string[],
+        placeLookup:string,
         status:string,
         displayTitle:string,
         ambiguous:boolean,

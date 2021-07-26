@@ -15,6 +15,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTab, MatTabsModule} from '@angular/material/tabs';
 import {MatProgressSpinnerModule, MatSpinner} from '@angular/material/progress-spinner';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
@@ -28,6 +30,9 @@ import { TestDataComponent } from './Components/test-data/test-data.component';
 import { ResourcesComponent } from './Components/resources/resources.component';
 import { EntitySearchComponent } from './Components/entity-search/entity-search.component';
 import { EntityResultComponent } from './Components/entity-result/entity-result.component';
+import { BibleSelectComponent } from './Components/bible-select/bible-select.component';
+import { BibleChapterComponent } from './Components/bible-chapter/bible-chapter.component';
+import { SafePipe } from './Pipes/safe.pipe';
 
 const fireBaseConfig = {
   apiKey: "AIzaSyCVQhRPtS9o0ORW0aaT9bjvrbGy1Ptrco4",
@@ -52,7 +57,10 @@ const fireBaseConfig = {
     TestDataComponent,
     ResourcesComponent,
     EntitySearchComponent,
-    EntityResultComponent
+    EntityResultComponent,
+    BibleSelectComponent,
+    BibleChapterComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,
@@ -70,7 +78,8 @@ const fireBaseConfig = {
     FormsModule,
     MatSnackBarModule,
     MatTabsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

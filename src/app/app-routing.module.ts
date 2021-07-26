@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BibleChapterComponent } from './Components/bible-chapter/bible-chapter.component';
+import { BibleSelectComponent } from './Components/bible-select/bible-select.component';
 import { EastonResultComponent } from './Components/easton-result/easton-result.component';
 import { EastonComponent } from './Components/easton/easton.component';
 import { EntityResultComponent } from './Components/entity-result/entity-result.component';
@@ -14,6 +16,8 @@ const routes: Routes = [
   { path: '',   component: HomeComponent, pathMatch: 'full' },
   { path: 'easton-result', component: EastonResultComponent },
   { path: 'entity-search', component: EntitySearchComponent },
+  { path: 'bible-select', component: BibleSelectComponent },
+  { path: 'bible-chapter', component: BibleChapterComponent },
   { path: 'entity-result', component: EntityResultComponent },
   { path: '404', component: NotFoundComponent },
   { path: '**', component: NotFoundComponent }

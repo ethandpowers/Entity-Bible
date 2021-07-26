@@ -1,0 +1,25 @@
+<div class="container mobile-center" *ngIf="chapterObject.fields.hasOwnProperty('verses')"
+    style="display: flex; flex-direction: column; align-items: center;">
+    <div style="display: flex; flex-direction: row; align-items: center;">
+        <h1 class="display-4">{{ getChapterDisplay(chapterObject.id) }}</h1>
+        <button mat-icon-button style="margin-left: 20px" (click)="returnToSelect()">
+            <mat-icon><i class="bi bi-arrow-return-left"></i></mat-icon>
+        </button>
+    </div>
+    <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content:center">
+        <div *ngFor="let object of getVerses(chapterObject)">
+            <div *ngIf="object.type == 'text'" style="margin-right: 6px;">{{ object.value }}</div>
+            <a style="margin-right: 6px;" *ngIf="object.type == 'link'" (click)="navigate(object.value)"
+                class="p-click">{{ object.title }}</a>
+        </div>
+    </div>
+    <div
+        style="display:flex; flex-direction: row; width: 100%; justify-content: space-around; padding-bottom: 20px; padding-top: 15px;">
+        <button mat-fab color="secondary" (click)="previousPage()" *ngIf="!this.isFirstPage()">
+            <i class="bi bi-arrow-90deg-left"></i>
+        </button>
+        <button mat-fab color="secondary" (click)="nextPage()" *ngIf="!this.isLastPage()">
+            <i class="bi bi-arrow-90deg-right"></i>
+        </button>
+    </div>
+</div>

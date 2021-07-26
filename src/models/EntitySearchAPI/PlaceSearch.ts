@@ -37,6 +37,17 @@ export class PlaceSearch {
     return results;
   }
 
+  static GetByPlaceLookup(str: string) {
+    let data: Place[] = <Place[]>require('src/assets/json/places.json');
+    let results: Place[] = [];
+    data.forEach((item) => {
+      if (item.fields.placeLookup.toLowerCase() == str.toLowerCase()) {
+        results.push(item);
+      }
+    });
+    return results;
+  }
+
   static GetByAlias(str: string) {
     let data: Place[] = <Place[]>require('src/assets/json/places.json');
     let results: Place[] = [];
@@ -62,9 +73,9 @@ export class PlaceSearch {
             let pushed = false;
             if (
               IdTranslator.fromId(element).fields.name.toLowerCase() ==
-                str.toLowerCase() ||
+              str.toLowerCase() ||
               IdTranslator.fromId(element).fields.displayTitle.toLowerCase() ==
-                str.toLowerCase()
+              str.toLowerCase()
             ) {
               results.push(item);
               pushed = true;
@@ -100,9 +111,9 @@ export class PlaceSearch {
             let pushed: boolean = false;
             if (
               IdTranslator.fromId(element).fields.name.toLowerCase() ==
-                str.toLowerCase() ||
+              str.toLowerCase() ||
               IdTranslator.fromId(element).fields.displayTitle.toLowerCase() ==
-                str.toLowerCase()
+              str.toLowerCase()
             ) {
               results.push(item);
               pushed = true;
