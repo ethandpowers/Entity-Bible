@@ -33,6 +33,7 @@ import { EntityResultComponent } from './Components/entity-result/entity-result.
 import { BibleSelectComponent } from './Components/bible-select/bible-select.component';
 import { BibleChapterComponent } from './Components/bible-chapter/bible-chapter.component';
 import { SafePipe } from './Pipes/safe.pipe';
+import { IonicModule } from '@ionic/angular';
 
 const fireBaseConfig = {
   apiKey: "AIzaSyCVQhRPtS9o0ORW0aaT9bjvrbGy1Ptrco4",
@@ -79,7 +80,8 @@ const fireBaseConfig = {
     MatSnackBarModule,
     MatTabsModule,
     MatProgressSpinnerModule,
-    MatGridListModule
+    MatGridListModule,
+    IonicModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

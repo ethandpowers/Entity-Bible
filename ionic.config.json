@@ -1,0 +1,7 @@
+{
+  "name": "EntityBible",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
