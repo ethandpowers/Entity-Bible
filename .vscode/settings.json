@@ -2,7 +2,7 @@
     "git.enabled": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "[javascript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+      "editor.defaultFormatter": "vscode.typescript-language-features"
     },
     "[html]": {
       "editor.defaultFormatter": "vscode.html-language-features"

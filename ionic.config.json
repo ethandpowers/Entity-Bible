@@ -1,5 +1,5 @@
 {
-  "name": "EntityBible",
+  "name": "app",
   "integrations": {
     "capacitor": {}
   },

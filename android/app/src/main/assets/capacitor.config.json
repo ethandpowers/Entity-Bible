@@ -1,0 +1,6 @@
+{
+	"appId": "com.entitybible.app",
+	"appName": "EntityBible",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
