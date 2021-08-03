@@ -60,7 +60,7 @@ export class BibleChapterComponent implements OnInit {
       let trimmedWord = word;
       if (word != undefined && word.length > 0) {
         if (word[0] == '_' || word[word.length - 1] == '_') {
-          trimmedWord = word.substring(1, word.length - 2)
+          trimmedWord = word.substring(1, word.length - 1)
         }
         if (word.startsWith('[')) {
           let results = this.getResults(word);
